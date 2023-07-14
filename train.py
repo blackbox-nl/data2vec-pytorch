@@ -3,10 +3,11 @@ import omegaconf
 from text.trainer import TextTrainer
 from vision.trainer import VisionTrainer
 from audio.trainer import AudioTrainer
+import logging
 
 if __name__ == '__main__':
     import argparse
-
+    logging.getLogger().setLevel('INFO')
     parser = argparse.ArgumentParser()
     parser.add_argument('--config', type=str, help='path to yaml config file')
     args = parser.parse_args()

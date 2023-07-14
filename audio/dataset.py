@@ -3,13 +3,14 @@ from torch.utils.data import Dataset
 from datasets import load_dataset
 from transformers.models.wav2vec2.modeling_wav2vec2 import _compute_mask_indices
 from transformers import Wav2Vec2FeatureExtractor
-
+import logging
 
 class TIMIT(Dataset):
     def __init__(self, cfg, split, **kwargs):
         super(TIMIT, self).__init__()
         path = cfg.dataset.path
-        self.data = load_dataset(path, 'clean')[split]
+        data_dir = cfg.dataset.data_dir
+        self.data = load_dataset(path, 'clean', data_dir)[split]
         self.feature_extractor = Wav2Vec2FeatureExtractor(cfg.model.encoder_checkpoint)
         self.__dict__.update(kwargs)
 
@@ -50,6 +51,7 @@ class DataCollatorForWav2Vec2Pretraining:  # copied from transformers/examples/p
 
     def __call__(self, features):
         # reformat list to dict and set to pytorch format
+        logging.info(f"EXTRACTOR {self.feature_extractor}")
         batch = self.feature_extractor.pad(
             features,
             padding=self.padding,

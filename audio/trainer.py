@@ -12,7 +12,7 @@ from audio.encoder import Encoder
 from audio.dataset import TIMIT, DataCollatorForWav2Vec2Pretraining
 from data2vec import Data2Vec
 from utils import AverageMeter, maybe_save_checkpoint
-
+import logging
 
 class AudioTrainer:
     def __init__(self, cfg: DictConfig):

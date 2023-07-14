@@ -12,6 +12,7 @@ model:
   ema_anneal_end_step: 300000
 dataset:
   path: 'timit_asr'
+  data_dir: '../datasets/timit'
 optimizer:
   lr: 0.0005
 train:
